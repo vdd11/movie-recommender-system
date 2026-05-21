@@ -1,6 +1,7 @@
 import os
 import sys
 import re
+import html as _html
 import random
 import base64
 import requests
@@ -719,24 +720,26 @@ def show_movie_cards(df, score_col=None, max_items=24):
                 [f"<span class='pill'>{p}</span>" for p in stream[:3]]
             )
 
+            safe_alt = _html.escape(shorten(title, 40), quote=True)
             img_html = (
                 f"<img src='{poster}' loading='lazy' "
                 f"style='width:100%;border-radius:14px;display:block;' "
-                f"alt='{shorten(title, 40)}'>"
+                f"alt='{safe_alt}'>"
             )
 
-            card_html = f"""
-            <div class='movie-card'>
-                {img_html}
-                <div class='movie-title'>{shorten(title, 58)}</div>
-                <div class='movie-meta'>{shorten(genres, 72)}</div>
-                <div>{platform_html}</div>
-                {score_html}
-                <div class='score-line'>Hype Score: {hype_score(title)} | Mentions: {total_buzz:,}</div>
-                <div class='score-line'>Movie ID: {movie_id}</div>
-                <a href='{trailer_url}' target='_blank' class='trailer-link'>&#9654; Trailer / Reviews</a>
-            </div>
-            """
+            card_parts = [
+                "<div class='movie-card'>",
+                img_html,
+                f"<div class='movie-title'>{shorten(title, 58)}</div>",
+                f"<div class='movie-meta'>{shorten(genres, 72)}</div>",
+                f"<div>{platform_html}</div>",
+                score_html,
+                f"<div class='score-line'>Hype Score: {hype_score(title)} &#124; Mentions: {total_buzz:,}</div>",
+                f"<div class='score-line'>Movie ID: {movie_id}</div>",
+                f"<a href='{trailer_url}' target='_blank' class='trailer-link'>&#9654; Trailer / Reviews</a>",
+                "</div>",
+            ]
+            card_html = "".join(card_parts)
 
             with col:
                 st.markdown(card_html, unsafe_allow_html=True)
