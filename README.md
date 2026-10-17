@@ -47,7 +47,22 @@ The pipeline runs from raw ratings through to a deployed app:
 
 ## Results
 
-The deployed app returns personalized hybrid recommendations, AI-powered natural language search results, trending titles, and trailers for any title in the catalog. The matrix factorization component (45% weight in the ensemble) contributed the strongest individual signal, consistently outperforming the popularity-only baseline on held-out test ratings. The live app handles end-to-end recommendation requests in real time with the full recommender system online.
+The deployed app returns personalized hybrid recommendations, AI-powered natural language search results, trending titles, and trailers for any title in the catalog.
+
+Offline evaluation (`notebooks/04_evaluation_comparison.ipynb`) uses the time-based split, ranks the top 10 recommendations per user, and counts a movie as relevant if the user rated it 4.0 or higher in the evaluation split:
+
+| Model | Split | Hit Rate@10 | Precision@10 | Recall@10 | Catalog coverage@10 |
+|---|---|---|---|---|---|
+| Popularity | Validation | 0.19 | 0.026 | 0.037 | 0.4% |
+| Matrix Factorization | Validation | 0.34 | 0.039 | 0.079 | 3.3% |
+| Hybrid | Validation | 0.35 | 0.042 | 0.084 | 4.5% |
+| Popularity | Test | 0.18 | 0.021 | 0.034 | 0.4% |
+| Matrix Factorization | Test | 0.27 | 0.037 | 0.071 | 3.3% |
+| Hybrid | Test | 0.27 | 0.038 | 0.065 | 4.5% |
+
+- Matrix factorization and the hybrid model both clearly beat the popularity baseline on every metric, and the hybrid model exposes more of the catalog (4.5% vs. 0.4% for popularity).
+- The hybrid model is roughly tied with matrix factorization on hit rate, so these results do not show a clear accuracy gain from the ensemble. On the test split its recall (0.065) is slightly lower than matrix factorization's (0.071).
+- **Caveats:** each number uses only the first 100 eligible users (by user ID) in the split, so differences of a few points are within noise. Results come from a single run. The notebook also defines an item-item KNN baseline that was not included in this table.
 
 ## Features
 
