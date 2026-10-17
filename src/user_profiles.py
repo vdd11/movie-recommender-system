@@ -4,7 +4,7 @@ import pandas as pd
 
 class UserProfileStore:
     """
-    Stores and manages user movie ratings for the StreamSense / FlikPik app.
+    Stores and manages user movie ratings for the FlikPik AI app.
     """
 
     def __init__(self, ratings_path):
