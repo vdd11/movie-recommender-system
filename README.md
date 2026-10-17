@@ -4,6 +4,12 @@
 
 **Live demo:** [flikpik-ai.onrender.com](https://flikpik-ai.onrender.com/)
 
+**My role:** Data Engineer & Data Prep Lead on a 4-person capstone team (see [My Role](#my-role)).
+
+**Tech stack:** Python, pandas, NumPy, scikit-learn, SciPy, Streamlit, TMDB API, Render
+
+![FlikPik AI home page with trending titles](screenshots/home-trending.png)
+
 ---
 
 ## Problem
@@ -70,26 +76,32 @@ The deployed app returns personalized hybrid recommendations, AI-powered natural
 ## Run It Locally
 
 ```bash
-git clone https://github.com/matthewkane-ml/ML_RecommendationSystems_MTK.git
-cd ML_RecommendationSystems_MTK
+git clone https://github.com/vdd11/movie-recommender-system.git
+cd movie-recommender-system
 pip install -r requirements.txt
 ```
 
-FlikPik AI needs a TMDB API key to fetch posters and metadata. Get a free key at [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api), then create a `.env` file in the project root:
+FlikPik AI needs a TMDB API key to fetch posters and metadata. Get a free key at [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api), then create a `.env` file in the project root (it is git-ignored; never commit it). A `YOUTUBE_API_KEY` is optional and enables automatic trailer lookup.
 
 ```
 TMDB_API_KEY=your_key_here
+YOUTUBE_API_KEY=optional_key_here
 ```
 
+Train the recommender (writes `models/hybrid_recommender.pkl`; the app will also train one on first launch if it is missing), then start the app from the project root:
+
 ```bash
-streamlit run app.py
+python src/train_model.py
+streamlit run app/app.py
 ```
+
+`app/app.py` is the entry point used by both the `Dockerfile` and `render.yaml`.
 
 ## Screenshots
 
-<!-- Add screenshots to a /screenshots folder in the repo, then update these paths -->
-![FlikPik AI home page with trending titles](screenshots/home.png)
-![Personalized recommendations](screenshots/recommendations.png)
+![FlikPik AI home page with trending titles](screenshots/home-trending.png)
+![Actor / director discovery for Quentin Tarantino](screenshots/actor-director-search.png)
+![Search results for "Lord of the Rings"](screenshots/title-search-results.png)
 
 ## What I'd Do Next
 
@@ -111,4 +123,6 @@ A 4-person 4Geeks Academy capstone project.
 
 ---
 
-**Author:** Matthew Kane — [LinkedIn](https://www.linkedin.com/in/thomas-kane-392094410/) · [GitHub](https://github.com/matthewkane-ml)
+**Team:** Matthew Kane ([GitHub](https://github.com/matthewkane-ml)), Tomeka L. German ([GitHub](https://github.com/tomekagerman)), Vishal Desai ([GitHub](https://github.com/vdd11)) and Brandon Henry. Built as a 4Geeks Academy capstone project.
+
+<!-- TODO: add Brandon Henry's GitHub link if known -->
