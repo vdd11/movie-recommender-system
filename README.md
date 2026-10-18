@@ -29,7 +29,7 @@ Built as a 4-person capstone project for the 4Geeks Academy Data Science & Machi
 
 ## Dataset
 
-- **Source:** [MovieLens 100K](https://grouplens.org/datasets/movielens/) — a standard ML research benchmark maintained by the University of Minnesota
+- **Source:** [MovieLens Latest Small](https://grouplens.org/datasets/movielens/latest/) (`ml-latest-small`) — a standard ML research benchmark maintained by the GroupLens group at the University of Minnesota
 - **Size:** 100,836 ratings across 9,742 movies and 610 users
 - **Enrichment:** TMDB API integration for real-time movie metadata, posters, and trailers
 - **Key features:** user IDs, movie IDs, ratings (0.5–5.0), timestamps, one-hot encoded genres, plus TMDB-sourced metadata
@@ -84,10 +84,6 @@ Offline evaluation (`notebooks/04_evaluation_comparison.ipynb`) uses the time-ba
 - Personalized taste insights
 - User rating system
 
-## Tech Stack
-
-`Python` · `pandas` · `NumPy` · `scikit-learn` · `SciPy (sparse matrices)` · `Streamlit` · `TMDB API` · `Render` · `Git`
-
 ## Run It Locally
 
 ```bash
@@ -114,13 +110,12 @@ streamlit run app/app.py
 
 ## Screenshots
 
-![FlikPik AI home page with trending titles](screenshots/home-trending.png)
 ![Actor / director discovery for Quentin Tarantino](screenshots/actor-director-search.png)
 ![Search results for "Lord of the Rings"](screenshots/title-search-results.png)
 
 ## What I'd Do Next
 
-- **Scale the dataset** — upgrade from MovieLens 100K to the full MovieLens 25M dataset for richer, more personalized recommendations with significantly reduced sparsity.
+- **Scale the dataset** — upgrade from MovieLens Latest Small (about 100K ratings) to the full MovieLens 25M dataset for richer, more personalized recommendations with significantly reduced sparsity.
 - **Polish the frontend** — tighten the UI, fix any rendering issues (a few score cards were displaying raw HTML in testing), and improve mobile responsiveness.
 - **Add cold-start handling** — build a proper onboarding flow where new users rate a handful of movies before receiving personalized recommendations, rather than falling back to the popularity baseline.
 - **Cache TMDB responses** — reduce external API calls and improve load times by caching poster and metadata responses locally.
@@ -134,10 +129,4 @@ A 4-person 4Geeks Academy capstone project.
 | Matthew Kane | [matthewkane-ml](https://github.com/matthewkane-ml) |
 | Tomeka L. German | [tomekagerman](https://github.com/tomekagerman) |
 | Vishal Desai | [vdd11](https://github.com/vdd11) |
-| Brandon Henry | — |
-
----
-
-**Team:** Matthew Kane ([GitHub](https://github.com/matthewkane-ml)), Tomeka L. German ([GitHub](https://github.com/tomekagerman)), Vishal Desai ([GitHub](https://github.com/vdd11)) and Brandon Henry. Built as a 4Geeks Academy capstone project.
-
-<!-- TODO: add Brandon Henry's GitHub link if known -->
+| Brandon Henry | [bhenrywc](https://github.com/bhenrywc) |
